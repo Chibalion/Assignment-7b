@@ -1,0 +1,136 @@
+
+//Created
+//Created
+//Created
+
+import PlaygroundSupport
+import UIKit
+import SpriteKit
+
+let enemyHealthLabel = UILabel()
+let userHealthLabel = UILabel()
+let victorLabel = UILabel()
+let kickButton = UIButton()
+let punchButton = UIButton()
+let totalUserHealth : Int = Int(arc4random_uniform(20) + 1)
+let totalEnemyHealth : Int = Int(arc4random_uniform(20) + 1)
+let userDamage : Int = Int(arc4random_uniform(3) + 1)
+let enemyDamage : Int = Int(arc4random_uniform(3) + 1)
+let userHealth = totalUserHealth
+let enemyHealth = totalUserHealth
+
+
+class ViewController : UIViewController {
+    // this is the main view controller, that will show the UIKit elements
+    
+    // properties
+    //Shows your monster 
+    let imageViewTwo = UIImageView(image: UIImage(named: "IMG_2026.PNG"))
+    let imageViewFirst = UIImageView(image: UIImage(named: "IMG_2028.PNG"))
+    
+    override func viewDidLoad() {
+        // UI
+        super.viewDidLoad()
+
+        
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.view = view
+        
+        victorLabel.text = ""
+        view.addSubview(victorLabel)
+        victorLabel.translatesAutoresizingMaskIntoConstraints = false
+        victorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        victorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
+        
+        userHealthLabel.text = "HP \(userHealth)/\(totalUserHealth)"
+        view.addSubview(userHealthLabel)
+        userHealthLabel.translatesAutoresizingMaskIntoConstraints = false
+        userHealthLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        userHealthLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 240).isActive = true
+        
+        enemyHealthLabel.text = "HP \(enemyHealth)/\(totalUserHealth)"
+        view.addSubview(enemyHealthLabel)
+        enemyHealthLabel.translatesAutoresizingMaskIntoConstraints = false
+        enemyHealthLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        enemyHealthLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -240).isActive = true
+        
+        view.addSubview(imageViewFirst)
+        imageViewFirst.translatesAutoresizingMaskIntoConstraints = false
+        imageViewFirst.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -200).isActive = true
+        imageViewFirst.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        view.addSubview(imageViewTwo)
+        imageViewTwo.translatesAutoresizingMaskIntoConstraints = false
+        imageViewTwo.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 200).isActive = true
+        imageViewTwo.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        kickButton.setTitle("Kick", for: .normal)
+        kickButton.setTitleColor(.blue, for: .normal)
+        kickButton.titleLabel?.textAlignment = .center
+        kickButton.addTarget(self, action: #selector(attackPower), for: .touchUpInside)
+        view.addSubview(kickButton)
+        kickButton.translatesAutoresizingMaskIntoConstraints = false
+        kickButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+        kickButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -240).isActive = true
+        
+        punchButton.setTitle("Punch", for: .normal)
+        punchButton.setTitleColor(.blue, for: .normal)
+        punchButton.titleLabel?.textAlignment = .center
+        punchButton.addTarget(self, action: #selector(attackPower2), for: .touchUpInside)
+        view.addSubview(punchButton)
+        punchButton.translatesAutoresizingMaskIntoConstraints = false
+        punchButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+        punchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 240).isActive = true
+        
+    }
+    
+    @objc func attackPower() {
+        
+        if kickButton.isSelected {
+        let userHealthLabel = "HP ";userHealth - enemyDamage;"/\(totalUserHealth)"
+        let enemyHealthLabel = "HP ";enemyHealth - userDamage;"/\(totalEnemyHealth)"
+    }
+        if userHealth <= 0 && enemyHealth > 0 {
+            victorLabel.text = "You lose"
+            
+        } else if userHealth > 0 && enemyHealth <= 0 {
+            victorLabel.text = "You win"
+            
+        } else if userHealth <= 0 && enemyHealth <= 0 {
+            victorLabel.text = "It's a tie"
+            
+        } else {
+            victorLabel.text = ""
+        }
+        
+    }
+    @objc func attackPower2() {
+        
+        if punchButton.isSelected {
+        let userHealthLabel = "HP ";userHealth - enemyDamage;"/\(totalUserHealth)"
+        let enemyHealthLabel = "HP ";enemyHealth - userDamage;"/\(totalEnemyHealth)"
+    }
+        if userHealth <= 0 && enemyHealth > 0 {
+            victorLabel.text = "You lose"
+            
+        } else if userHealth > 0 && enemyHealth <= 0 {
+            victorLabel.text = "You win"
+            
+        } else if userHealth <= 0 && enemyHealth <= 0 {
+            victorLabel.text = "It's a tie"
+            
+        } else {
+            victorLabel.text = ""
+        }
+        
+    }
+    
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+}
+
+// this will be commented out when code moved to Xcode
+PlaygroundPage.current.liveView = ViewController()
